@@ -15,6 +15,7 @@ The next step is to tell your web browser to use Start as your homepage and/or n
 - [Safari](http://www.wikihow.com/Change-Your-Start-Page-on-Safari)
 - [Chrome (uses extension)](https://chrome.google.com/webstore/detail/replace-new-tab-page/cnkhddihkmmiiclaipbaaelfojkmlkja)
 - [Firefox](http://lifehacker.com/5916533/set-a-custom-new-tab-page-in-firefox)
+- [Internet Explorer](http://windows.microsoft.com/en-us/windows/open-new-tab-homepage-internet-explorer#1TC=windows-7)
 
 ## Using Start
 
@@ -40,7 +41,7 @@ Because your bookmarks are saved directly in your browser, you will need to expo
 
 ## Developers
 
-I used the Mac app, CodeKit, to compile everything into a single HTML file. The `start.kit` file is where most of the magic happens. The Kit language allows for importing _any_ file, so `start.kit` grabs the CSS and JavaScript and compiles it all into `start.html`.
+I used the Mac app, [CodeKit](http://incident57.com/codekit/), to compile everything into a single HTML file. The `start.kit` file is where most of the magic happens. The [Kit language](http://incident57.com/codekit/help.html#kit) allows for importing _any_ file, so `start.kit` grabs the CSS and JavaScript and compiles it all into `start.html`.
 
 ### Backup data
 
