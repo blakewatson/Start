@@ -7,7 +7,7 @@ html {
 
 body {
   background: #fff;
-  font-family: "Helvetica Neue";
+  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 24px; }
 
@@ -218,8 +218,7 @@ a.icon {
     color: #c00 !important; }
 
 .intro {
-  width: 90%;
-  max-width: 600px;
+  width: 50%;
   margin: 0 auto;
   margin-top: 100px; }
 
@@ -257,6 +256,9 @@ button {
     width: 65%; }
 
   .importexport {
+    width: 65%; }
+
+  .intro {
     width: 65%; } }
 @media (max-width: 600px) {
   .actions {
@@ -264,6 +266,9 @@ button {
 
   .page {
     margin-top: 24px;
+    width: 90%; }
+
+  .intro {
     width: 90%; }
 
   .group {

@@ -254,6 +254,7 @@ function StartViewModel() {
 			self.loadStorage();
 		}
 		self.importCode("");
+		self.isImportExport(false);
 	};
 	
 	// Select export code to clipboard

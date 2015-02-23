@@ -42,6 +42,7 @@
 	<div class="intro" data-bind="visible: bundles().length == 0">
 		<h1 class="page-title">Start</h1>
 		<p>You don't have any bookmarks saved yet. <a href="#" data-bind="click: toggleAddForm">Create a bookmark</a> now.</p>
+		<p>Use Start in another browser? <a href="" data-bind="click: toggleImportExport">Import your bookmarks</a>.</p>
 	</div>
 	
 	<!-- Shows the bookmarks -->
@@ -104,11 +105,20 @@
 	</div>
 	
 	<!-- Import / Export -->
-	<div class="importexport" data-bind="visible: isImportExport">
+	<div class="importexport" data-bind="visible: isImportExport() && bundles().length > 0">
 		<h2 class="page-title">Import / Export</h2>
 		<p>Export current bookmarks (copy the code, then import it into your other browser/computer):</p>
 		<textarea data-bind="value: ko.toJSON($root), click: selectExportCode($element)"></textarea>
 		<p>Or, replace them with a new set of bookmarks (importing will <strong>replace</strong> all of your current bookmarks):</p>
+		<textarea data-bind="textInput: importCode" placeholder="Paste import code here…"></textarea>
+		<button data-bind="click: importBookmarks, enable: importCode()!==''">Import bookmarks</button>
+		<a href="#" data-bind="click: toggleImportExport">Done</a>
+	</div>
+	
+	<!-- Import only -->
+	<div class="importexport" data-bind="visible: isImportExport() && bundles().length < 1">
+		<h2 class="page-title">Import</h2>
+		<p>If you have a set of Start bookmarks in another browser, you can paste the import code below:</p>
 		<textarea data-bind="textInput: importCode" placeholder="Paste import code here…"></textarea>
 		<button data-bind="click: importBookmarks, enable: importCode()!==''">Import bookmarks</button>
 		<a href="#" data-bind="click: toggleImportExport">Done</a>

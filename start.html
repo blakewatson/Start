@@ -117,7 +117,7 @@ html {
 
 body {
   background: #fff;
-  font-family: "Helvetica Neue";
+  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 24px; }
 
@@ -328,8 +328,7 @@ a.icon {
     color: #c00 !important; }
 
 .intro {
-  width: 90%;
-  max-width: 600px;
+  width: 50%;
   margin: 0 auto;
   margin-top: 100px; }
 
@@ -367,6 +366,9 @@ button {
     width: 65%; }
 
   .importexport {
+    width: 65%; }
+
+  .intro {
     width: 65%; } }
 @media (max-width: 600px) {
   .actions {
@@ -374,6 +376,9 @@ button {
 
   .page {
     margin-top: 24px;
+    width: 90%; }
+
+  .intro {
     width: 90%; }
 
   .group {
@@ -437,6 +442,7 @@ button {
 	<div class="intro" data-bind="visible: bundles().length == 0">
 		<h1 class="page-title">Start</h1>
 		<p>You don't have any bookmarks saved yet. <a href="#" data-bind="click: toggleAddForm">Create a bookmark</a> now.</p>
+		<p>Use Start in another browser? <a href="" data-bind="click: toggleImportExport">Import your bookmarks</a>.</p>
 	</div>
 	
 	<!-- Shows the bookmarks -->
@@ -499,11 +505,20 @@ button {
 	</div>
 	
 	<!-- Import / Export -->
-	<div class="importexport" data-bind="visible: isImportExport">
+	<div class="importexport" data-bind="visible: isImportExport() && bundles().length > 0">
 		<h2 class="page-title">Import / Export</h2>
 		<p>Export current bookmarks (copy the code, then import it into your other browser/computer):</p>
 		<textarea data-bind="value: ko.toJSON($root), click: selectExportCode($element)"></textarea>
 		<p>Or, replace them with a new set of bookmarks (importing will <strong>replace</strong> all of your current bookmarks):</p>
+		<textarea data-bind="textInput: importCode" placeholder="Paste import code here…"></textarea>
+		<button data-bind="click: importBookmarks, enable: importCode()!==''">Import bookmarks</button>
+		<a href="#" data-bind="click: toggleImportExport">Done</a>
+	</div>
+	
+	<!-- Import only -->
+	<div class="importexport" data-bind="visible: isImportExport() && bundles().length < 1">
+		<h2 class="page-title">Import</h2>
+		<p>If you have a set of Start bookmarks in another browser, you can paste the import code below:</p>
 		<textarea data-bind="textInput: importCode" placeholder="Paste import code here…"></textarea>
 		<button data-bind="click: importBookmarks, enable: importCode()!==''">Import bookmarks</button>
 		<a href="#" data-bind="click: toggleImportExport">Done</a>
@@ -778,6 +793,7 @@ function StartViewModel() {
 			self.loadStorage();
 		}
 		self.importCode("");
+		self.isImportExport(false);
 	};
 	
 	// Select export code to clipboard
