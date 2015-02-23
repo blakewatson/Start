@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <meta charset="utf-8" />
+	<title>Start</title>
+	<style>
+		<!-- @import _reset.css -->
+		<!-- @import style.css -->
+	</style>
+	<style>/* @import "style.css" */</style>
+</head>
+
+<body>
+	<div class="appview">
+	
+	<!-- Action buttons -->
+	<div class="actions" data-bind="visible: bundles().length > 0">
+		<a href="#" data-bind="click: toggleAddForm"><span class="icon">&#10010;</span> Add</a>
+		<a href="#" data-bind="click: toggleEditMode, css: { editing: isReordering }">
+			<span class="icon">&#63490;</span>
+			<!-- ko if: !isReordering() -->
+				Edit / Reorder
+			<!-- /ko -->
+			<!-- ko if: isReordering -->
+				Done
+			<!-- /ko -->
+		</a>
+		<a href="#" data-bind="click: toggleImportExport">
+			<span class="icon">&#10095;</span>
+			<!-- ko if: !isImportExport() -->
+				Import / Export
+			<!-- /ko -->
+			<!-- ko if: isImportExport -->
+				Done
+			<!-- /ko -->
+		</a>
+	</div>
+	
+	<!-- Introduction -->
+	<div class="intro" data-bind="visible: bundles().length == 0">
+		<h1 class="page-title">Start</h1>
+		<p>You don't have any bookmarks saved yet. <a href="#" data-bind="click: toggleAddForm">Create a bookmark</a> now.</p>
+	</div>
+	
+	<!-- Shows the bookmarks -->
+	<div class="page" data-bind="foreach: columns, visible: !isImportExport()">
+		<!-- Normal, clickable and hyperlinked version -->
+		<div class="column" data-bind="visible: !$root.isReordering(), foreach: bundles, css: { 'first-column': $index()==0 }">
+			<div class="bundle">
+				<h1 data-bind="text: name"></h1>
+				<div class="group bookmarks" data-bind="foreach: bookmarks">
+					<p class="bookmark"><a data-bind="text: name, attr: { href: url }"></a></p>
+				</div>
+			</div>
+		</div>
+		<!-- Reordering version -->
+		<div class="column editing-column" data-bind="visible: $root.isReordering, sortable: { data: bundles, connectClass: 'column', afterMove: $root.dumpStorage }, css: { 'first-column': $index()==0, 'empty-column': bundles().length < 1 }">
+			<div class="bundle">
+				<h1 class="editing" data-bind="text: name"></h1>
+				<div class="group bookmarks editing" data-bind="sortable: { data: bookmarks, connectClass: 'bookmarks', afterMove: $root.afterMove }">
+					<p class="bookmark">
+						<a data-bind="text: name, click: $root.startEditing"></a>
+						<span class="delete-bookmark" data-bind="click: function(data, event) { $root.deleteBookmark(data, $parents) }">&#9003;</span>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div><!-- end .page -->
+	
+	<!-- Add a bookmark form -->
+	<div class="add-bookmark" data-bind="visible: showAddForm">
+		<form action="" data-bind="submit: addBookmark, onkey">
+			<h2 class="subhead">Add a bookmark</h2>
+			<input type="text" id="bookmark-name" data-bind="textInput: newBookmarkName" placeholder="Name" />
+			<input type="text" id="bookmark-url" data-bind="textInput: newBookmarkURL" placeholder="URL" />
+			<select data-bind="options: bundles,
+							   optionsText: 'name',
+							   optionsCaption: 'Bundle...',
+							   value: selectedBundle">				   
+			</select>
+			<input id="wantsNewBundle" type="checkbox" data-bind="checked: wantsNewBundle" />
+			<label for="wantsNewBundle">New bundle?</label>
+			<input type="text" data-bind="textInput: newBundleName, visible: wantsNewBundle" placeholder="New Bundle" />
+			<select data-bind="options: columns,
+							   optionsText: 'name',
+							   value: selectedColumn,
+							   visible: wantsNewBundle"></select>
+			<button type="submit" data-bind="enable: canAddBookmark">Add Bookmark</button>
+			<a class="icon close-form" href="#" data-bind="click: toggleAddForm">&#10006;</a>
+		</form>
+	</div>
+	
+	<!-- Edit bookmark form -->
+	<div class="add-bookmark edit-bookmark" data-bind="visible: isEditing">
+		<form action="" data-bind="submit: addBookmark, onkey">
+			<h2 class="subhead">Edit this bookmark</h2>
+			<input type="text" id="updated-bookmark-name" data-bind="textInput: updatedName" placeholder="Name" />
+			<input type="text" id="updated-bookmark-url" data-bind="textInput: updatedURL" placeholder="URL" />
+			<button type="submit" data-bind="click: updateBookmark, enable: updatedName() && updatedURL()">Update Bookmark</button>
+			<a class="icon close-form" href="#" data-bind="click: stopEditing">&#10006;</a>
+		</form>
+	</div>
+	
+	<!-- Import / Export -->
+	<div class="importexport" data-bind="visible: isImportExport">
+		<h2 class="page-title">Import / Export</h2>
+		<p>Export current bookmarks (copy the code, then import it into your other browser/computer):</p>
+		<textarea data-bind="value: ko.toJSON($root), click: selectExportCode($element)"></textarea>
+		<p>Or, replace them with a new set of bookmarks (importing will <strong>replace</strong> all of your current bookmarks):</p>
+		<textarea data-bind="textInput: importCode" placeholder="Paste import code here…"></textarea>
+		<button data-bind="click: importBookmarks, enable: importCode()!==''">Import bookmarks</button>
+		<a href="#" data-bind="click: toggleImportExport">Done</a>
+	</div>
+	
+	<div class="footer">
+		<p>Love Start? <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=F9PPVWZUT3DBG&lc=US&item_name=Blake%20Watson%20%28Start%29&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted">Buy Blake a coffee</a>!</p>
+	</div>
+	
+	</div>
+	
+	<p class="loading">Loading…</p>
+	
+	<!-- Include JavaScript -->
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/knockout-sortable/0.8.1/knockout-sortable.min.js"></script>
+	<script><!-- @import "script.js" --></script>
+	
+	<!--
+		<!-- @import LICENSE.txt -->
+	-->
+</body>
+	
+</html>

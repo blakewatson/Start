@@ -1,0 +1,330 @@
+@import "bourbon"
+
+$light_border: 1px solid #ddd
+
+/* apply a natural box layout model to all elements, but allowing components to change */
+html
+	box-sizing: border-box
+
+*, *:before, *:after
+	box-sizing: inherit
+
+body
+	background: #fff
+	font-family: "Helvetica Neue"
+	font-size: 16px
+	line-height: 24px
+
+a
+	color: #000
+
+.appview
+	display: none
+	
+.loading
+	margin-top: 100px
+	text-align: center
+
+.actions
+	@include clearfix
+	width: 50%
+	margin: 0 auto
+	margin-top: 15px
+	font-size: 12px
+	
+	a
+		display: block
+		float: right
+		padding: 3px 10px
+		margin-left: 20px
+		border: 0
+		border-radius: 5px
+		color: #999
+		background-color: #fff
+		text-decoration: none
+		
+		&:hover
+			color: #000
+			background-color: #f0f0f0
+			text-decoration: none
+			
+			.icon
+				color: #000
+		
+		.icon
+			color: #999
+
+a.icon
+	display: inline-block
+	
+	&:hover
+		text-decoration: none
+
+.page
+	@include clearfix
+	width: 50%
+	margin: 0 auto
+	margin-top: 50px
+
+.column
+	position: relative
+	width: 45%
+	float: left
+
+	h1
+		font-size: 12px
+		line-height: 18px
+		position: absolute
+		top: -10px
+		left: 103%
+		width: 100px
+		font-weight: normal
+		color: #aaa
+		
+		&.editing
+			cursor: move
+
+.first-column
+	margin-right: 10%
+	
+	h1
+		right: 103%
+		left: auto
+		text-align: right
+
+.editing-column
+	background: #eee
+	
+.empty-column
+	min-height: 50px
+
+.bundle
+	position: relative
+
+.bookmarks
+	border-top: 1px solid #000
+
+.bookmark
+	margin-bottom: 0
+	position: relative
+
+	&:hover
+		background: #f0f0f0
+
+	span
+		visibility: hidden
+		display: block
+		position: absolute
+		top: 1px
+		right: 0
+		padding: 0 5px
+		background: #f0f0f0
+		cursor: pointer
+
+	&:hover span
+		visibility: visible
+		
+	a
+		text-decoration: none
+		display: block
+		padding: 3px 10px
+		border-bottom: 1px solid rgba(0,0,0, 0.1)
+		background: transparent
+		color: #000
+		-moz-box-sizing: border-box
+	
+	a:hover
+		color: #000
+		background: #f0f0f0
+		text-decoration: underline
+		
+		.editing &
+			cursor: move
+
+	.inline a
+		display: inline
+		padding: 0
+		border: none
+	
+	.inline a:hover
+		background: transparent
+
+.group
+	position: relative
+
+//.group p:nth-of-type(1)
+	//a
+		//border-top-color: #000
+
+.add-bookmark
+	display: block
+	position: absolute
+	top: 50px
+	left: 0
+	right: 0
+	width: 90%
+	max-width: 300px
+	margin: 0 auto
+	padding: 20px
+	background: #fff
+	bottom: $light_border
+	border-radius: 5px
+	box-shadow: 0 0 8px rgba(#000, 0.2)
+	
+	form
+		position: relative
+		
+	h2
+		margin-bottom: 12px
+
+	label
+		display: inline-block
+		margin: 0
+		line-height: 24px
+		
+	input[type="text"]
+		display: block
+		width: 100%
+		margin: 0
+		margin-bottom: 12px
+		padding: 5px 10px
+		border: $light_border
+		border-radius: 5px
+		font-size: 16px
+		
+	input[type="checkbox"]
+		display: inline-block
+		position: relative
+		margin: 0
+		margin-bottom: 12px
+		top: 4px
+		line-height: 24px
+		
+	select
+		display: block
+		margin: 0
+		margin-bottom: 12px
+		padding: 5px 10px
+		background: transparent
+		border: $light_border
+		border-radius: 5px
+		font-size: 16px
+			
+	.close-form
+		position: absolute
+		top: -20px
+		right: -20px
+		padding: 3px 10px
+		border: 0
+		color: #ccc
+		text-decoration: none
+		
+		&:hover
+			color: #000
+			
+.importexport
+	width: 50%
+	margin: 0 auto
+	margin-top: 50px
+	
+	p
+		margin-bottom: 16px
+	
+	textarea
+		width: 100%
+		height: 100px
+		margin-bottom: 16px
+		padding: 10px
+		border: $light_border
+		box-sizing: border-box
+
+.editing
+	color: #c00 !important
+	a
+		color: #c00
+	
+	.icon
+		color: #c00 !important
+
+.intro
+	width: 90%
+	max-width: 600px
+	margin: 0 auto
+	margin-top: 100px
+	
+.page-title
+	margin-bottom: 16px
+		
+button
+	display: block
+	margin: 0
+	margin-top: 12px
+	margin-bottom: 12px
+	padding: 5px 10px
+	background: #eee
+	border: $light_border
+	border-radius: 5px
+	font-size: 16px
+	
+	&:enabled
+		border-color: #999
+		color: #000
+
+.footer
+	margin-top: 50px
+	font-size: 14px
+	text-align: center
+	
+	p
+		color: #ccc
+	
+	a
+		color: #ccc
+
+@media (max-width: 800px)
+
+	.actions
+		width: 65%
+		
+	.page
+		width: 65%
+		
+	.importexport
+		width: 65%
+
+@media (max-width: 600px)
+
+	.actions
+		width: 90%
+
+	.page
+		margin-top: 24px
+		width: 90%
+	
+	.group
+		margin-bottom: 24px
+	
+	.column
+		width: 100%
+		float: none
+	
+	.first-column
+		margin-right: 0
+	
+	.column h1
+		position: relative
+		top: auto
+		right: auto
+		bottom: auto
+		left: auto
+		text-align: left
+		color: #000
+	
+	.first-column h1
+		right: auto
+		left: auto
+		text-align: left
+	
+	.importexport
+		width: 90%
+		margin-top: 24px

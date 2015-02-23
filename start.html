@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <meta charset="utf-8" />
+	<title>Start</title>
+	<style>
+		/* 
+html5doctor.com Reset Stylesheet
+v1.6
+Last Updated: 2010-08-18
+Author: Richard Clark - http://richclarkdesign.com 
+Twitter: @rich_clark
+*/
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+}
+
+body {
+    line-height:1;
+}
+
+article,aside,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section { 
+    display:block;
+}
+
+nav ul {
+    list-style:none;
+}
+
+blockquote, q {
+    quotes:none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content:'';
+    content:none;
+}
+
+a {
+    margin:0;
+    padding:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+}
+
+/* change colours to suit your needs */
+ins {
+    background-color:#ff9;
+    color:#000;
+    text-decoration:none;
+}
+
+/* change colours to suit your needs */
+mark {
+    background-color:#ff9;
+    color:#000; 
+    font-style:italic;
+    font-weight:bold;
+}
+
+del {
+    text-decoration: line-through;
+}
+
+abbr[title], dfn[title] {
+    border-bottom:1px dotted inherit;
+    cursor:help;
+}
+
+table {
+    border-collapse:collapse;
+    border-spacing:0;
+}
+
+/* change border colour to suit your needs */
+hr {
+    display:block;
+    height:1px;
+    border:0;   
+    border-top:1px solid #cccccc;
+    margin:1em 0;
+    padding:0;
+}
+
+input, select {
+    vertical-align:middle;
+}
+		/* apply a natural box layout model to all elements, but allowing components to change */
+html {
+  box-sizing: border-box; }
+
+*, *:before, *:after {
+  box-sizing: inherit; }
+
+body {
+  background: #fff;
+  font-family: "Helvetica Neue";
+  font-size: 16px;
+  line-height: 24px; }
+
+a {
+  color: #000; }
+
+.appview {
+  display: none; }
+
+.loading {
+  margin-top: 100px;
+  text-align: center; }
+
+.actions {
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 15px;
+  font-size: 12px; }
+  .actions::after {
+    clear: both;
+    content: "";
+    display: table; }
+  .actions a {
+    display: block;
+    float: right;
+    padding: 3px 10px;
+    margin-left: 20px;
+    border: 0;
+    border-radius: 5px;
+    color: #999;
+    background-color: #fff;
+    text-decoration: none; }
+    .actions a:hover {
+      color: #000;
+      background-color: #f0f0f0;
+      text-decoration: none; }
+      .actions a:hover .icon {
+        color: #000; }
+    .actions a .icon {
+      color: #999; }
+
+a.icon {
+  display: inline-block; }
+  a.icon:hover {
+    text-decoration: none; }
+
+.page {
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 50px; }
+  .page::after {
+    clear: both;
+    content: "";
+    display: table; }
+
+.column {
+  position: relative;
+  width: 45%;
+  float: left; }
+  .column h1 {
+    font-size: 12px;
+    line-height: 18px;
+    position: absolute;
+    top: -10px;
+    left: 103%;
+    width: 100px;
+    font-weight: normal;
+    color: #aaa; }
+    .column h1.editing {
+      cursor: move; }
+
+.first-column {
+  margin-right: 10%; }
+  .first-column h1 {
+    right: 103%;
+    left: auto;
+    text-align: right; }
+
+.editing-column {
+  background: #eee; }
+
+.empty-column {
+  min-height: 50px; }
+
+.bundle {
+  position: relative; }
+
+.bookmarks {
+  border-top: 1px solid #000; }
+
+.bookmark {
+  margin-bottom: 0;
+  position: relative; }
+  .bookmark:hover {
+    background: #f0f0f0; }
+  .bookmark span {
+    visibility: hidden;
+    display: block;
+    position: absolute;
+    top: 1px;
+    right: 0;
+    padding: 0 5px;
+    background: #f0f0f0;
+    cursor: pointer; }
+  .bookmark:hover span {
+    visibility: visible; }
+  .bookmark a {
+    text-decoration: none;
+    display: block;
+    padding: 3px 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    background: transparent;
+    color: #000;
+    -moz-box-sizing: border-box; }
+  .bookmark a:hover {
+    color: #000;
+    background: #f0f0f0;
+    text-decoration: underline; }
+    .editing .bookmark a:hover {
+      cursor: move; }
+  .bookmark .inline a {
+    display: inline;
+    padding: 0;
+    border: none; }
+  .bookmark .inline a:hover {
+    background: transparent; }
+
+.group {
+  position: relative; }
+
+.add-bookmark {
+  display: block;
+  position: absolute;
+  top: 50px;
+  left: 0;
+  right: 0;
+  width: 90%;
+  max-width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #fff;
+  bottom: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2); }
+  .add-bookmark form {
+    position: relative; }
+  .add-bookmark h2 {
+    margin-bottom: 12px; }
+  .add-bookmark label {
+    display: inline-block;
+    margin: 0;
+    line-height: 24px; }
+  .add-bookmark input[type="text"] {
+    display: block;
+    width: 100%;
+    margin: 0;
+    margin-bottom: 12px;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px; }
+  .add-bookmark input[type="checkbox"] {
+    display: inline-block;
+    position: relative;
+    margin: 0;
+    margin-bottom: 12px;
+    top: 4px;
+    line-height: 24px; }
+  .add-bookmark select {
+    display: block;
+    margin: 0;
+    margin-bottom: 12px;
+    padding: 5px 10px;
+    background: transparent;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px; }
+  .add-bookmark .close-form {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    padding: 3px 10px;
+    border: 0;
+    color: #ccc;
+    text-decoration: none; }
+    .add-bookmark .close-form:hover {
+      color: #000; }
+
+.importexport {
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 50px; }
+  .importexport p {
+    margin-bottom: 16px; }
+  .importexport textarea {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 16px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    box-sizing: border-box; }
+
+.editing {
+  color: #c00 !important; }
+  .editing a {
+    color: #c00; }
+  .editing .icon {
+    color: #c00 !important; }
+
+.intro {
+  width: 90%;
+  max-width: 600px;
+  margin: 0 auto;
+  margin-top: 100px; }
+
+.page-title {
+  margin-bottom: 16px; }
+
+button {
+  display: block;
+  margin: 0;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  padding: 5px 10px;
+  background: #eee;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px; }
+  button:enabled {
+    border-color: #999;
+    color: #000; }
+
+.footer {
+  margin-top: 50px;
+  font-size: 14px;
+  text-align: center; }
+  .footer p {
+    color: #ccc; }
+  .footer a {
+    color: #ccc; }
+
+@media (max-width: 800px) {
+  .actions {
+    width: 65%; }
+
+  .page {
+    width: 65%; }
+
+  .importexport {
+    width: 65%; } }
+@media (max-width: 600px) {
+  .actions {
+    width: 90%; }
+
+  .page {
+    margin-top: 24px;
+    width: 90%; }
+
+  .group {
+    margin-bottom: 24px; }
+
+  .column {
+    width: 100%;
+    float: none; }
+
+  .first-column {
+    margin-right: 0; }
+
+  .column h1 {
+    position: relative;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    text-align: left;
+    color: #000; }
+
+  .first-column h1 {
+    right: auto;
+    left: auto;
+    text-align: left; }
+
+  .importexport {
+    width: 90%;
+    margin-top: 24px; } }
+	</style>
+	<style>/* @import "style.css" */</style>
+</head>
+
+<body>
+	<div class="appview">
+	
+	<!-- Action buttons -->
+	<div class="actions" data-bind="visible: bundles().length > 0">
+		<a href="#" data-bind="click: toggleAddForm"><span class="icon">&#10010;</span> Add</a>
+		<a href="#" data-bind="click: toggleEditMode, css: { editing: isReordering }">
+			<span class="icon">&#63490;</span>
+			<!-- ko if: !isReordering() -->
+				Edit / Reorder
+			<!-- /ko -->
+			<!-- ko if: isReordering -->
+				Done
+			<!-- /ko -->
+		</a>
+		<a href="#" data-bind="click: toggleImportExport">
+			<span class="icon">&#10095;</span>
+			<!-- ko if: !isImportExport() -->
+				Import / Export
+			<!-- /ko -->
+			<!-- ko if: isImportExport -->
+				Done
+			<!-- /ko -->
+		</a>
+	</div>
+	
+	<!-- Introduction -->
+	<div class="intro" data-bind="visible: bundles().length == 0">
+		<h1 class="page-title">Start</h1>
+		<p>You don't have any bookmarks saved yet. <a href="#" data-bind="click: toggleAddForm">Create a bookmark</a> now.</p>
+	</div>
+	
+	<!-- Shows the bookmarks -->
+	<div class="page" data-bind="foreach: columns, visible: !isImportExport()">
+		<!-- Normal, clickable and hyperlinked version -->
+		<div class="column" data-bind="visible: !$root.isReordering(), foreach: bundles, css: { 'first-column': $index()==0 }">
+			<div class="bundle">
+				<h1 data-bind="text: name"></h1>
+				<div class="group bookmarks" data-bind="foreach: bookmarks">
+					<p class="bookmark"><a data-bind="text: name, attr: { href: url }"></a></p>
+				</div>
+			</div>
+		</div>
+		<!-- Reordering version -->
+		<div class="column editing-column" data-bind="visible: $root.isReordering, sortable: { data: bundles, connectClass: 'column', afterMove: $root.dumpStorage }, css: { 'first-column': $index()==0, 'empty-column': bundles().length < 1 }">
+			<div class="bundle">
+				<h1 class="editing" data-bind="text: name"></h1>
+				<div class="group bookmarks editing" data-bind="sortable: { data: bookmarks, connectClass: 'bookmarks', afterMove: $root.afterMove }">
+					<p class="bookmark">
+						<a data-bind="text: name, click: $root.startEditing"></a>
+						<span class="delete-bookmark" data-bind="click: function(data, event) { $root.deleteBookmark(data, $parents) }">&#9003;</span>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div><!-- end .page -->
+	
+	<!-- Add a bookmark form -->
+	<div class="add-bookmark" data-bind="visible: showAddForm">
+		<form action="" data-bind="submit: addBookmark, onkey">
+			<h2 class="subhead">Add a bookmark</h2>
+			<input type="text" id="bookmark-name" data-bind="textInput: newBookmarkName" placeholder="Name" />
+			<input type="text" id="bookmark-url" data-bind="textInput: newBookmarkURL" placeholder="URL" />
+			<select data-bind="options: bundles,
+							   optionsText: 'name',
+							   optionsCaption: 'Bundle...',
+							   value: selectedBundle">				   
+			</select>
+			<input id="wantsNewBundle" type="checkbox" data-bind="checked: wantsNewBundle" />
+			<label for="wantsNewBundle">New bundle?</label>
+			<input type="text" data-bind="textInput: newBundleName, visible: wantsNewBundle" placeholder="New Bundle" />
+			<select data-bind="options: columns,
+							   optionsText: 'name',
+							   value: selectedColumn,
+							   visible: wantsNewBundle"></select>
+			<button type="submit" data-bind="enable: canAddBookmark">Add Bookmark</button>
+			<a class="icon close-form" href="#" data-bind="click: toggleAddForm">&#10006;</a>
+		</form>
+	</div>
+	
+	<!-- Edit bookmark form -->
+	<div class="add-bookmark edit-bookmark" data-bind="visible: isEditing">
+		<form action="" data-bind="submit: addBookmark, onkey">
+			<h2 class="subhead">Edit this bookmark</h2>
+			<input type="text" id="updated-bookmark-name" data-bind="textInput: updatedName" placeholder="Name" />
+			<input type="text" id="updated-bookmark-url" data-bind="textInput: updatedURL" placeholder="URL" />
+			<button type="submit" data-bind="click: updateBookmark, enable: updatedName() && updatedURL()">Update Bookmark</button>
+			<a class="icon close-form" href="#" data-bind="click: stopEditing">&#10006;</a>
+		</form>
+	</div>
+	
+	<!-- Import / Export -->
+	<div class="importexport" data-bind="visible: isImportExport">
+		<h2 class="page-title">Import / Export</h2>
+		<p>Export current bookmarks (copy the code, then import it into your other browser/computer):</p>
+		<textarea data-bind="value: ko.toJSON($root), click: selectExportCode($element)"></textarea>
+		<p>Or, replace them with a new set of bookmarks (importing will <strong>replace</strong> all of your current bookmarks):</p>
+		<textarea data-bind="textInput: importCode" placeholder="Paste import code here…"></textarea>
+		<button data-bind="click: importBookmarks, enable: importCode()!==''">Import bookmarks</button>
+		<a href="#" data-bind="click: toggleImportExport">Done</a>
+	</div>
+	
+	<div class="footer">
+		<p>Love Start? <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=F9PPVWZUT3DBG&lc=US&item_name=Blake%20Watson%20%28Start%29&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted">Buy Blake a coffee</a>!</p>
+	</div>
+	
+	</div>
+	
+	<p class="loading">Loading…</p>
+	
+	<!-- Include JavaScript -->
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/knockout-sortable/0.8.1/knockout-sortable.min.js"></script>
+	<script>// Bookmark class
+function Bookmark(args) {
+	var self = this;
+	self.name = ko.observable(args["name"]);
+	self.url = ko.observable(args["url"]);
+	//self.sub_name = ko.observable(args["sub_name"]);
+	//self.sub_url = ko.observable(args["sub_url"]);
+}
+
+// Column class
+function Column(args) {
+	var self = this;
+	self.name = args["name"];
+	self.bundles = ko.observableArray([]);
+}
+
+// Bundle class
+function Bundle(args) {
+	var self = this;
+	if(args["name"]=="") {
+		args["name"] = "Links";
+	}
+	self.name = args["name"];
+	self.bookmarks = ko.observableArray([]);
+}
+
+function StartViewModel() {
+	var self = this;
+	
+	// All the columns > bundles > bookmarks
+	self.columns = ko.observableArray([new Column({name: "Column 1"}), new Column({name: "Column 2"})]);
+	
+	// All the bundles > bookmarks
+	self.bundles = ko.computed(function() {
+		var bundles = [];
+		for(var i=0; i<self.columns().length; i++) {
+			var column = self.columns()[i];
+			for(var j=0; j<column.bundles().length; j++) {
+				bundles.push( column.bundles()[j] )
+			}
+		}
+		return bundles;
+	});
+	
+	// Get a specific bundle
+/*
+	self.getBundleByName = function(name) {
+		for(var i=0; i<self.bundles().length; i++) {
+			var bundle = self.bundles()[i];
+			if(bundle.name == name) {
+				return bundle;
+			}
+		}
+		return false
+	};
+*/
+	
+	/* -- New bookmark add-form --------------------------------- */
+	
+	// Input value for new bookmark name
+	self.newBookmarkName = ko.observable("");
+	
+	// Input value for new bookmark url
+	self.newBookmarkURL = ko.observable("");
+	
+	// Selected bundle in add form drop-down
+	self.selectedBundle = ko.observable("");
+	
+	// Checkbox for adding a new bundle
+	self.wantsNewBundle = ko.observable(false);
+	
+	// Input value for adding a new bundle
+	self.newBundleName = ko.observable("");
+	
+	// Selected column in add-form drop-down
+	self.selectedColumn = ko.observable("");
+	
+	// Flag for showing/hiding add form
+	self.showAddForm = ko.observable(false);
+	
+	// Function for showing/hiding add form
+	self.toggleAddForm = function() {
+		if(self.showAddForm()) {
+			self.showAddForm(false);
+		} else {
+			self.showAddForm(true);
+		}
+	};
+	
+	// Function determining whether form sufficiently completed
+	self.canAddBookmark = ko.computed(function() {
+		var verdict = false;
+		if(self.newBookmarkName() != "") {
+			if(self.newBookmarkURL() != "") {
+				if(self.selectedBundle() != "" && self.selectedBundle() != undefined) {
+					verdict = true;
+				} else if(self.newBundleName() != "") {
+					verdict = true;
+				}
+			}
+		}
+		return verdict;
+	});
+	
+	// Add a new bookmark
+	self.addBookmark = function() {
+		var bookmark = new Bookmark({
+			name: self.newBookmarkName(),
+			url: self.newBookmarkURL()
+		});
+		var bundle;
+		if(self.wantsNewBundle()) {
+			// add a new bundle
+			bundle = new Bundle({
+				name: self.newBundleName()
+			});
+			bundle.bookmarks.push(bookmark);
+			var column = self.selectedColumn();
+			column.bundles.push(bundle);
+		} else {
+			bundle = self.selectedBundle();
+			bundle.bookmarks.push(bookmark);
+		}
+		self.dumpStorage(); // Save changes!
+		self.clearAddForm();
+		self.toggleAddForm();
+	};
+	
+	// Reset the add form to blank values
+	self.clearAddForm = function() {
+		self.newBookmarkName("");
+		self.newBookmarkURL("");
+		self.selectedBundle("");
+		self.wantsNewBundle(false);
+		self.newBundleName("");
+		self.selectedColumn("");
+	};
+	
+	/* -- Editing and rearranging ------------------------------- */
+	
+	// Flag for reordering
+	self.isReordering = ko.observable(false)
+	
+	// Function for reordering edit mode
+	self.toggleEditMode = function() {
+		if(self.isReordering()) {
+			self.isReordering(false);
+		} else {
+			self.isReordering(true);
+		}
+	};
+	
+	// Just rearranged, check for empty bundles
+	self.afterMove = function() {
+		var columns = self.columns();
+		for(var i=0; i<columns.length; i++) {
+			var bundles = columns[i].bundles();
+			for(var k=0; k<bundles.length; k++) {
+				if(bundles[k].bookmarks().length < 1) {
+					self.deleteBundle(bundles[k], columns[i]);
+				}
+			}
+		}
+		self.dumpStorage();
+	};
+	
+	// Flag for editing a bookmark
+	self.isEditing = ko.observable(false);
+	
+	// Stop editing mode
+	self.stopEditing = function() {
+		// Hide the edit form
+		self.isEditing(false);
+		// Reset form values
+		self.updatedName("");
+		self.updatedURL("");
+		self.openedBookmark = {};
+	};
+	
+	// Show and prepopulate the edit form
+	self.startEditing = function(bookmark) {
+		// Set the currently opened bookmark
+		self.openedBookmark = bookmark;
+		// Populate text fields
+		self.updatedName(bookmark.name());
+		self.updatedURL(bookmark.url());
+		// Show edit form
+		self.isEditing(true);
+	}
+	
+	// Observables/properties for edit form values
+	self.updatedName = ko.observable("");
+	self.updatedURL = ko.observable("");
+	self.openedBookmark = {};
+	
+	// Update a bookmark
+	self.updateBookmark = function() {
+		var bookmark = self.openedBookmark;
+		// Make the changes
+		bookmark.name(self.updatedName());
+		bookmark.url(self.updatedURL());
+		// Hide edit form
+		self.stopEditing();
+		// Save to storage
+		self.dumpStorage();
+	};
+	
+	// Delete a bookmark
+	self.deleteBookmark = function(bookmark, parents) {
+		var bundle = parents[0];
+		bundle.bookmarks.remove(bookmark);
+		if(bundle.bookmarks().length < 1) {
+			self.deleteBundle(bundle, parents[1]);
+		}
+		self.dumpStorage();
+	};
+	
+	// Delete a bundle
+	self.deleteBundle = function(bundle, column) {
+		column.bundles.remove(bundle);
+	};
+	
+	/* -- Import / Export --------------------------------------- */
+	
+	// Flag
+	self.isImportExport = ko.observable(false);
+	
+	// Toggle for import / export view
+	self.toggleImportExport = function() {
+		if(self.isImportExport()) {
+			self.isImportExport(false);
+		} else {
+			self.isImportExport(true);
+		}
+	};
+	
+	// Observable that holds the value of the import textarea
+	self.importCode = ko.observable("");
+	
+	// Override local storage with new bookmarks
+	self.importBookmarks = function() {
+		if(self.importCode() !== "" && isJsonString(self.importCode())) {
+			// Make a backup
+			var current_storage = window.localStorage.getItem("com.blakewatson.start");
+			window.localStorage.setItem("com.blakewatson.start.backup", current_storage);
+			
+			// Overwrite main storage
+			window.localStorage.setItem("com.blakewatson.start", self.importCode());
+			
+			// Now load it
+			self.loadStorage();
+		}
+		self.importCode("");
+	};
+	
+	// Select export code to clipboard
+	self.selectExportCode = function(element) {
+		element.select()
+	};
+	
+	/* -- Interact with local storage --------------------------- */
+	
+	self.dumpStorage = function() {
+		var dump = ko.toJSON(self);
+		window.localStorage.setItem("com.blakewatson.start", dump);
+		return true;
+	};
+	
+	self.loadStorage = function() {
+		if( window.localStorage.getItem("com.blakewatson.start") ) {
+			var load = JSON.parse(window.localStorage.getItem("com.blakewatson.start"));
+			var columns = [];
+			// loop over columns
+			for(var i=0; i<load["columns"].length; i++) {
+				var this_column = load["columns"][i];
+				var new_column = new Column({name: this_column["name"]});
+				var bundles = [];
+				// loop over bundles
+				for(var k=0; k<this_column["bundles"].length; k++) {
+					var this_bundle = this_column["bundles"][k];
+					var bookmarks = [];
+					// loop over bookmarks
+					for(var z=0; z<this_bundle["bookmarks"].length; z++) {
+						var this_bookmark = this_bundle["bookmarks"][z];
+						var new_bookmark = new Bookmark({
+							name: this_bookmark["name"],
+							url: this_bookmark["url"]
+						});
+						bookmarks.push(new_bookmark);
+					}
+					var bundle = new Bundle({
+						name: this_bundle["name"]
+					});
+					bundle.bookmarks(bookmarks);
+					bundles.push(bundle);
+				}
+				new_column.bundles(bundles);
+				columns.push(new_column);
+			}
+			self.columns(columns);
+			return true;
+		} else {
+			return false;
+		}
+	};
+}
+
+var start = new StartViewModel();
+ko.applyBindings( start );
+start.loadStorage();
+
+$(document).ready(function() {
+	$(".loading").hide();
+	$(".appview").show();
+});
+
+/* -- Helpers ------------------------------------------------ */
+
+function isJsonString(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+    return true;
+}</script>
+	
+	<!--
+		This Software ("Start") is licensed under The MIT License (MIT).
+
+Copyright (c) 2015 Blake Watson
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.	-->
+</body>
+	
+</html>
