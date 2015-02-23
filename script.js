@@ -212,6 +212,9 @@ function StartViewModel() {
 		if(bundle.bookmarks().length < 1) {
 			self.deleteBundle(bundle, parents[1]);
 		}
+		if(self.bundles().length < 1) {
+			self.isReordering(false);
+		}
 		self.dumpStorage();
 	};
 	
